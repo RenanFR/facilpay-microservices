@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog 
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext 
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd 
+		http://www.liquibase.org/xml/ns/dbchangelog 
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="Renan F Rodrigues" id="01 Estrutura Inicial">
+    
+        <createTable tableName="tbl_estabelecimento">
+            <column autoIncrement="true" name="id_loja" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="pk_tbl_estabelecimento"/>
+            </column>
+            <column name="ds_atv_economica" type="VARCHAR(255)"/>
+            <column name="fl_ativo" type="BOOL"/>
+            <column name="cd_cnpj" type="VARCHAR(255)"/>
+            <column name="nu_celular" type="VARCHAR(255)"/>
+            <column name="ds_email" type="VARCHAR(255)"/>
+            <column name="nm_pessoa" type="VARCHAR(255)"/>
+            <column name="nu_telefone" type="VARCHAR(255)"/>
+            <column name="cd_cpf" type="VARCHAR(255)"/>
+            <column name="dt_fim_contrato" type="DATETIME"/>
+            <column name="dt_inicio_contrato" type="DATETIME"/>
+            <column name="nm_bairro" type="VARCHAR(255)"/>
+            <column name="cd_cep" type="VARCHAR(255)"/>
+            <column name="nm_cidade" type="VARCHAR(255)"/>
+            <column name="nm_uf" type="VARCHAR(255)"/>
+            <column name="ds_logradouro" type="VARCHAR(255)"/>
+            <column name="nu_endereco" type="VARCHAR(255)"/>
+            <column name="cd_ie" type="VARCHAR(255)"/>
+            <column name="cd_im" type="VARCHAR(255)"/>
+            <column name="ds_natureza_juridica" type="VARCHAR(255)"/>
+            <column name="nm_fantasia" type="VARCHAR(255)"/>
+            <column name="nu_contrato" type="VARCHAR(255)"/>
+            <column name="nm_porte" type="VARCHAR(255)"/>
+            <column name="nm_razao_social" type="VARCHAR(255)"/>
+            <column name="id_segmento" type="BIGINT"/>
+        </createTable>            
+        
+        <createTable tableName="tbl_segmento_estabelecimento">
+            <column autoIncrement="true" name="id_segmento" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="pk_tbl_segmento_estabelecimento"/>
+            </column>
+            <column name="nm_segmento" type="VARCHAR(255)"/>
+            <column name="ds_segmento" type="VARCHAR(255)"/>
+        </createTable>
+         
+        <createTable tableName="tbl_servico_estabelecimento">
+            <column name="id_servico" type="BIGINT">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="id_loja" type="BIGINT">
+            	<constraints nullable="false"/>
+            </column>
+        </createTable> 
+        
+        <createTable tableName="tbl_servico_facil_pay">
+            <column autoIncrement="true" name="id_servico" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="pk_tbl_servico_facil_pay"/>
+            </column>
+            <column name="nm_servico" type="VARCHAR(255)"/>
+            <column name="ds_servico" type="VARCHAR(255)"/>
+        </createTable>
+        
+    	<addPrimaryKey 
+   				columnNames="id_servico, id_loja"
+                constraintName="pk_tbl_servico_estabelecimento"
+                tableName="tbl_servico_estabelecimento"/>        
+        
+        <addForeignKeyConstraint baseColumnNames="id_loja" baseTableName="tbl_servico_estabelecimento" constraintName="fk_servico_loja" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_loja" referencedTableName="tbl_estabelecimento"/>
+        <addForeignKeyConstraint baseColumnNames="id_servico" baseTableName="tbl_servico_estabelecimento" constraintName="fk_servico_estabelecimento" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_servico" referencedTableName="tbl_servico_facil_pay"/>
+        <addForeignKeyConstraint baseColumnNames="id_segmento" baseTableName="tbl_estabelecimento" constraintName="fk_estabelecimento_segmento" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_segmento" referencedTableName="tbl_segmento_estabelecimento"/>
+        
+    </changeSet>
+    
+</databaseChangeLog>

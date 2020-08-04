@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog 
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext 
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd 
+		http://www.liquibase.org/xml/ns/dbchangelog 
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="Renan F Rodrigues" id="01 Estrutura Inicial">
+    
+        <createTable tableName="tbl_cartao">
+            <column autoIncrement="true" name="id_cartao" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="pk_tbl_cartao"/>
+            </column>
+            <column name="tp_bandeira" type="VARCHAR(255)"/>
+            <column name="nu_bin" type="VARCHAR(255)"/>
+            <column name="dt_vencimento" type="date"/>
+            <column name="nu_iin" type="VARCHAR(255)"/>
+            <column name="nm_titular" type="VARCHAR(255)"/>
+            <column name="nu_cartao" type="VARCHAR(255)"/>
+            <column name="tp_cartao" type="VARCHAR(255)"/>
+            <column name="id_portador" type="BIGINT"/>
+        </createTable>
+        
+        <createTable tableName="tbl_parcela_cartao">
+            <column autoIncrement="true" name="id_parcela" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="pk_tbl_parcela_cartao"/>
+            </column>
+            <column name="qt_parcela" type="INT"/>
+            <column name="vl_parcela" type="numeric(19, 2)"/>
+            <column name="id_cartao" type="BIGINT"/>
+            <column name="id_transacao" type="BIGINT"/>
+        </createTable> 
+        
+        <createTable tableName="tbl_portador">
+            <column autoIncrement="true" name="id_comprador" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="pk_tbl_portador"/>
+            </column>
+            <column name="nu_celular" type="VARCHAR(255)"/>
+            <column name="ds_email" type="VARCHAR(255)"/>
+            <column name="nm_pessoa" type="VARCHAR(255)"/>
+            <column name="nu_telefone" type="VARCHAR(255)"/>
+            <column name="cd_cpf" type="VARCHAR(255)"/>
+            <column name="dt_nascimento" type="VARCHAR(255)"/>
+            <column name="nm_bairro" type="VARCHAR(255)"/>
+            <column name="cd_cep" type="VARCHAR(255)"/>
+            <column name="nm_cidade" type="VARCHAR(255)"/>
+            <column name="nm_uf" type="VARCHAR(255)"/>
+            <column name="ds_logradouro" type="VARCHAR(255)"/>
+            <column name="nu_endereco" type="VARCHAR(255)"/>
+            <column name="nm_portador" type="VARCHAR(255)"/>
+        </createTable> 
+        
+        <createTable tableName="tbl_transacao">
+            <column autoIncrement="true" name="id_transacao" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="pk_tbl_transacao"/>
+            </column>
+            <column name="cd_transacao" type="VARCHAR(255)"/>
+            <column name="qt_cartoes" type="INT"/>
+            <column name="cd_token" type="VARCHAR(255)"/>
+            <column name="vl_total" type="numeric(19, 2)"/>
+            <column name="id_loja" type="BIGINT"/>
+        </createTable>
+        
+        <addForeignKeyConstraint baseColumnNames="id_portador" baseTableName="tbl_cartao" constraintName="fk_cartao_portador" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_comprador" referencedTableName="tbl_portador"/>
+        <addForeignKeyConstraint baseColumnNames="id_cartao" baseTableName="tbl_parcela_cartao" constraintName="fk_parcela_cartao" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_cartao" referencedTableName="tbl_cartao"/>
+        <addForeignKeyConstraint baseColumnNames="id_transacao" baseTableName="tbl_parcela_cartao" constraintName="fk_parcela_transacao" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_transacao" referencedTableName="tbl_transacao"/>
+    
+    </changeSet>
+    
+</databaseChangeLog>
