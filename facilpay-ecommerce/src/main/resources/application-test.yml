@@ -1,1 +1,17 @@
+# Database properties
+spring:
+  datasource:
+    jdbcUrl: jdbc:h2:mem:facilpay-test-db-ec;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: 
+    driverClassName: org.h2.Driver
+  liquibase:
+    change-log: classpath:db/facilpay-db-ec-changelog.xml
+  cloud:
+    discovery: 
+      enabled: false
+    config:
+      discovery:
+        enabled: false
+      enabled: false
 sqlDialect: org.hibernate.dialect.H2Dialect
