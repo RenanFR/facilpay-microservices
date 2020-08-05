@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.facilpay.payment.infra.db.adapter;
+package br.com.facilpay.payment.output.db.adapter;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

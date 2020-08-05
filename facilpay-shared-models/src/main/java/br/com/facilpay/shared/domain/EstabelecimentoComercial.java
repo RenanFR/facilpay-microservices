@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.facilpay.ecommerce.domain;
+package br.com.facilpay.shared.domain;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import br.com.caelum.stella.bean.validation.CNPJ;
 import br.com.caelum.stella.bean.validation.CPF;
-import br.com.facilpay.ecommerce.entrypoint.rest.json.LocalDateTimeDeserializer;
+import br.com.facilpay.shared.json.LocalDateTimeDeserializer;
 import br.com.facilpay.shared.models.Contato;
 import br.com.facilpay.shared.models.Endereco;
 import io.swagger.annotations.ApiModel;

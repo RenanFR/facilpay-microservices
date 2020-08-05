@@ -29,10 +29,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.facilpay.ecommerce.domain.EstabelecimentoComercial;
 import br.com.facilpay.ecommerce.entrypoint.rest.EstabelecimentoComercialFilter;
 import br.com.facilpay.ecommerce.entrypoint.rest.FacilPayResponse;
 import br.com.facilpay.ecommerce.exception.ApiError;
+import br.com.facilpay.shared.domain.EstabelecimentoComercial;
 import br.com.facilpay.shared.models.Contato;
 import br.com.facilpay.shared.models.Endereco;
 import io.cucumber.java.Before;

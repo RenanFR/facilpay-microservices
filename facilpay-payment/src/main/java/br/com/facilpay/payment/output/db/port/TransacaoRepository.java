@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.facilpay.payment.infra.db.port;
+package br.com.facilpay.payment.output.db.port;
 
 import br.com.facilpay.payment.domain.Transacao;
 

@@ -1,14 +1,14 @@
 /**
  * 
  */
-package br.com.facilpay.payment.infra.db.adapter;
+package br.com.facilpay.payment.output.db.adapter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import br.com.facilpay.payment.domain.Transacao;
-import br.com.facilpay.payment.infra.db.port.TransacaoRepository;
 import br.com.facilpay.payment.infra.mapper.TransacaoMapper;
+import br.com.facilpay.payment.output.db.port.TransacaoRepository;
 import br.com.facilpay.shared.exception.EntidadeNaoEncontradaException;
 import br.com.facilpay.shared.exception.EntidadeNaoEncontradaException.TipoEntidade;
 

@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import br.com.facilpay.ecommerce.entrypoint.rest.json.LocalDateTimeDeserializer;
+import br.com.facilpay.shared.json.LocalDateTimeDeserializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

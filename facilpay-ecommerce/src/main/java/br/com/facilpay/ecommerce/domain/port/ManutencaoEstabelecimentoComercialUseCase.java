@@ -6,8 +6,8 @@ package br.com.facilpay.ecommerce.domain.port;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import br.com.facilpay.ecommerce.domain.EstabelecimentoComercial;
 import br.com.facilpay.ecommerce.entrypoint.rest.EstabelecimentoComercialFilter;
+import br.com.facilpay.shared.domain.EstabelecimentoComercial;
 
 /**
  * @author rnfr

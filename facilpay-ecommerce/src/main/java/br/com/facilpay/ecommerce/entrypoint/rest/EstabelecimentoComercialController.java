@@ -5,6 +5,8 @@ package br.com.facilpay.ecommerce.entrypoint.rest;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,9 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.facilpay.ecommerce.domain.EstabelecimentoComercial;
 import br.com.facilpay.ecommerce.domain.port.ManutencaoEstabelecimentoComercialUseCase;
 import br.com.facilpay.infra.SwaggerConfig;
+import br.com.facilpay.shared.domain.EstabelecimentoComercial;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -38,6 +40,8 @@ import io.swagger.annotations.ApiResponses;
 @Api(tags = { SwaggerConfig.TAG_ESTABELECIMENTO })
 public class EstabelecimentoComercialController {
 	
+	private static final Logger LOG = LoggerFactory.getLogger(EstabelecimentoComercialController.class);
+	
 	@Autowired
 	private ManutencaoEstabelecimentoComercialUseCase ecUseCase;
 
@@ -49,6 +53,7 @@ public class EstabelecimentoComercialController {
 	@GetMapping("/{id}")
 	public ResponseEntity<EstabelecimentoComercial> getEstabelecimentoPorId(
 			@PathVariable("id") Long id) {
+		LOG.info("BUSCANDO O ESTABELECIMENTO PARA O ID {}", id);
 		return ResponseEntity.ok(ecUseCase.buscarPorId(id));
 	}
 	
@@ -56,6 +61,7 @@ public class EstabelecimentoComercialController {
 	@PostMapping
 	public ResponseEntity<EstabelecimentoComercial> postEstabelecimento(
 			@RequestBody @Valid EstabelecimentoComercial estabelecimento) {
+		LOG.info("INCLUINDO O NOVO ESTABELECIMENTO {}, DADOS: {}", estabelecimento.getRazaoSocial(), estabelecimento.toString());
 		return ResponseEntity.ok(ecUseCase.salvarOuAtualizar(estabelecimento));
 	}
 
@@ -63,6 +69,7 @@ public class EstabelecimentoComercialController {
 	@PutMapping
 	public ResponseEntity<EstabelecimentoComercial> putEstabelecimento(
 			@RequestBody EstabelecimentoComercial estabelecimento) {
+		LOG.info("ALTERANDO OS ESTABELECIMENTOS PARA O ESTABELECIMENTO {}, DADOS: {}", estabelecimento.getRazaoSocial(), estabelecimento.toString());
 		return ResponseEntity.ok(ecUseCase.salvarOuAtualizar(estabelecimento));
 	}
 
@@ -71,6 +78,7 @@ public class EstabelecimentoComercialController {
 	public ResponseEntity<EstabelecimentoComercial> deleteEstabelecimento(
 			@ApiParam(value = "CÓDIGO IDENTIFICADOR DO ESTABELECIMENTO, GERADO PELO BACK OFFICE DA FÁCIL PAY", example = "1") 
 			@PathVariable("id") Long id) {
+		LOG.info("REALIZANDO A EXCLUSÃO DO ESTABELECIMENTO COM O ID {}", id);
 		return ResponseEntity.ok(ecUseCase.removePorId(id));
 	}
 	
@@ -99,6 +107,7 @@ public class EstabelecimentoComercialController {
 					.razaoSocial(razaoSocial)
 					.nomeFantasia(nomeFantasia)
 				.build();
+		LOG.info("REALIZANDO A BUSCA POR ESTABELECIMENTOS USANDO OS SEGUINTES CRITÉRIOS: {}", filter);
 		Page<EstabelecimentoComercial> resultadoPesquisa = ecUseCase.pesquisar(filter, PageRequest.of(page, size));
 		FacilPayResponse<EstabelecimentoComercial> response = new FacilPayResponse<>();
 		response.setContent(resultadoPesquisa.getContent());

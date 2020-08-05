@@ -12,12 +12,12 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.facilpay.ecommerce.domain.EstabelecimentoComercial;
-import br.com.facilpay.ecommerce.domain.SegmentoEstabelecimento;
-import br.com.facilpay.ecommerce.domain.ServicoFacilPay;
 import br.com.facilpay.ecommerce.infra.entities.EstabelecimentoComercialEntity;
 import br.com.facilpay.ecommerce.infra.entities.SegmentoEstabelecimentoEntity;
 import br.com.facilpay.ecommerce.infra.entities.ServicoFacilPayEntity;
+import br.com.facilpay.shared.domain.EstabelecimentoComercial;
+import br.com.facilpay.shared.domain.SegmentoEstabelecimento;
+import br.com.facilpay.shared.domain.ServicoFacilPay;
 import br.com.facilpay.shared.entities.ContatoEntity;
 import br.com.facilpay.shared.entities.EnderecoEntity;
 import br.com.facilpay.shared.models.Contato;

@@ -14,6 +14,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -21,23 +23,23 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
-import br.com.facilpay.ecommerce.domain.EstabelecimentoComercial;
 import br.com.facilpay.ecommerce.entrypoint.rest.EstabelecimentoComercialFilter;
 import br.com.facilpay.ecommerce.infra.db.port.EstabelecimentoComercialRepository;
 import br.com.facilpay.ecommerce.infra.entities.EstabelecimentoComercialEntity;
 import br.com.facilpay.ecommerce.infra.mapper.EstabelecimentoComercialMapper;
+import br.com.facilpay.shared.domain.EstabelecimentoComercial;
 import br.com.facilpay.shared.exception.EntidadeNaoEncontradaException;
 import br.com.facilpay.shared.exception.EntidadeNaoEncontradaException.TipoEntidade;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author rnfr
  *
  */
 
-@Slf4j
 @Repository
 public class EstabelecimentoComercialRepositoryAdapter implements EstabelecimentoComercialRepository {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(EstabelecimentoComercialRepositoryAdapter.class);
 	
 	@Autowired
 	private SpringJPAEstabelecimentoComercialRepository repository;
@@ -61,7 +63,7 @@ public class EstabelecimentoComercialRepositoryAdapter implements Estabeleciment
 
 	@Override
 	public EstabelecimentoComercial salvarOuAtualizar(EstabelecimentoComercial estabelecimento) {
-		log.info("SALVANDO O ESTABELECIMENTO {}", estabelecimento.getRazaoSocial());
+		LOG.info("SALVANDO O ESTABELECIMENTO {}", estabelecimento.getRazaoSocial());
 		EstabelecimentoComercialEntity ecEntity = mapper.convertToEntity(estabelecimento);
 		return mapper.convertToDto(repository.save(ecEntity));
 	}

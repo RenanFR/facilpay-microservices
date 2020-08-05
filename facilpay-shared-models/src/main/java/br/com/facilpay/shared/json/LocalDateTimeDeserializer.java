@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.facilpay.ecommerce.entrypoint.rest.json;
+package br.com.facilpay.shared.json;
 
 import java.io.IOException;
 import java.time.LocalDate;

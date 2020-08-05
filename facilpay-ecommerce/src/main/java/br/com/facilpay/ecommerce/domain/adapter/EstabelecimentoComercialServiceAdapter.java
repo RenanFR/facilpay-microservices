@@ -8,10 +8,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.facilpay.ecommerce.domain.EstabelecimentoComercial;
 import br.com.facilpay.ecommerce.domain.port.ManutencaoEstabelecimentoComercialUseCase;
 import br.com.facilpay.ecommerce.entrypoint.rest.EstabelecimentoComercialFilter;
 import br.com.facilpay.ecommerce.infra.db.port.EstabelecimentoComercialRepository;
+import br.com.facilpay.shared.domain.EstabelecimentoComercial;
 
 /**
  * @author Renan F Rodrigues

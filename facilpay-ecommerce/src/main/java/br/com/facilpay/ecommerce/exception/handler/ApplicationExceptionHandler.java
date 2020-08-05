@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -18,6 +20,8 @@ import br.com.facilpay.shared.exception.EntidadeNaoEncontradaException;
 
 @RestControllerAdvice
 public class ApplicationExceptionHandler {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(ApplicationExceptionHandler.class);
 	
 	@ResponseStatus(code = HttpStatus.NOT_FOUND)
 	@ExceptionHandler({ EntidadeNaoEncontradaException.class })
@@ -61,7 +65,7 @@ public class ApplicationExceptionHandler {
 	public ResponseEntity<?> handleGeneric(RuntimeException exception, HttpServletRequest httpRequest) {
 		
 		String userMessage = "ERRO NO PROCESSAMENTO DA REQUISIÇÃO (BACKEND)";
-		exception.printStackTrace();
+		LOG.error(exception.getMessage());
 		String devMessage = exception.toString();
 		
 		List<ApiError> errors = List.of(ApiError
