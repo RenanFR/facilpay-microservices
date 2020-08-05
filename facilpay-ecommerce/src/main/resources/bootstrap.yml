@@ -1,0 +1,19 @@
+spring: 
+  application:
+    name: 'facilpay-backoffice-ec'
+  profiles:
+    active: default
+  cloud:
+    config:
+      uri: http://localhost:8888
+
+# Database migration configuration
+config:
+  liquibase:
+    change-log: classpath:/db/facilpay-db-ec-changelog.xml
+    database-change-log-table: tbl_database_migrations
+    database-change-log-lock-table: tbl_database_migrations_lock
+
+sqlDialect: org.hibernate.dialect.PostgreSQLDialect
+entityPackage: br.com.facilpay.ecommerce.infra.entities
+apiPackage: br.com.facilpay.ecommerce.entrypoint.rest

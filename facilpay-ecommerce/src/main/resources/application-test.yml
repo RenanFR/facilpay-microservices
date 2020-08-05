@@ -1,0 +1,1 @@
+sqlDialect: org.hibernate.dialect.H2Dialect
