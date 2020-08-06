@@ -1,0 +1,10 @@
+spring: 
+  application:
+    name: 'facilpay-payment-tx'
+  cloud:
+    consul:
+      config:
+        fail-fast: true
+        profileSeparator: '_'
+      host: localhost
+      port: 8500

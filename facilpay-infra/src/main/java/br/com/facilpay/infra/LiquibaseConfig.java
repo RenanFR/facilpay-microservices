@@ -27,13 +27,13 @@ public class LiquibaseConfig {
 	@Qualifier(value = "rds-datasource")
 	private DataSource dataSource;
 	
-	@Value("${config.liquibase.database-change-log-table}")
+	@Value("${liquibase.database-change-log-table}")
 	private String changelogTable;
 
-	@Value("${config.liquibase.database-change-log-lock-table}")
+	@Value("${liquibase.database-change-log-lock-table}")
 	private String changelogLockTable;
 	
-	@Value("${config.liquibase.change-log}")
+	@Value("${liquibase.change-log}")
 	private String changelog;
 	
 	@Bean

@@ -32,4 +32,4 @@ Funcionalidade: manutencao de estabelecimentos comerciais
     
 	Exemplos:
 	   | cnpj | cpf | inscricaoEstadual | razaoSocial | nomeFantasia | numResultados |
-	   | 15.304.663/0001-77 ||||| 2 |
+	   | 15.304.663/0001-77 ||||| 1 |
