@@ -1,9 +1,9 @@
 server:
-  port: 8080
+  port: 8081
 
 spring: 
   application:
-    name: 'facilpay-backoffice-ec'
+    name: 'facilpay-payment-tx'
   cloud:
     consul:
       config:
@@ -11,7 +11,7 @@ spring:
       host: localhost
       port: 8500
   datasource:
-    jdbcUrl: jdbc:postgresql://localhost:5432/facilpay-db-ec
+    jdbcUrl: jdbc:postgresql://localhost:5432/facilpay-db-tx
     username: postgres
     password: postgres
     driverClassName: org.postgresql.Driver
@@ -23,10 +23,10 @@ logging:
 # Database migration configuration
 config:
   liquibase:
-    change-log: classpath:/db/facilpay-db-ec-changelog.xml
+    change-log: classpath:/db/facilpay-db-tx-changelog.xml
     database-change-log-table: tbl_database_migrations
     database-change-log-lock-table: tbl_database_migrations_lock
 
 sqlDialect: org.hibernate.dialect.PostgreSQLDialect
-entityPackage: br.com.facilpay.ecommerce.infra.entities
-apiPackage: br.com.facilpay.ecommerce.entrypoint.rest
+entityPackage: br.com.facilpay.payment.infra.entities
+#apiPackage: br.com.facilpay.payment.entrypoint.rest
