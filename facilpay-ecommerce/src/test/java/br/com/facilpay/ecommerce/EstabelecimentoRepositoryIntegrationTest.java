@@ -13,8 +13,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import br.com.facilpay.ecommerce.infra.db.adapter.SpringJPAEstabelecimentoComercialRepository;
 import br.com.facilpay.ecommerce.infra.entities.EstabelecimentoComercialEntity;
+import br.com.facilpay.ecommerce.output.db.adapter.SpringJPAEstabelecimentoComercialRepository;
 import lombok.extern.slf4j.Slf4j;
 
 /**

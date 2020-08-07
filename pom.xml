@@ -26,7 +26,8 @@
 		<module>facilpay-payment</module>
     	<module>facilpay-infra</module>
     	<module>facilpay-shared-models</module>
-  	</modules>	
+    <module>facilpay-audit</module>
+  </modules>	
 	
 	<dependencyManagement>
 	

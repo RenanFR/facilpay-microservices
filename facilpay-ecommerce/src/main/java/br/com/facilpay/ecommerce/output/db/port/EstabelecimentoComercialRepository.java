@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.facilpay.ecommerce.infra.db.port;
+package br.com.facilpay.ecommerce.output.db.port;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.facilpay.ecommerce.infra.db.adapter;
+package br.com.facilpay.ecommerce.output.db.adapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +24,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import br.com.facilpay.ecommerce.entrypoint.rest.EstabelecimentoComercialFilter;
-import br.com.facilpay.ecommerce.infra.db.port.EstabelecimentoComercialRepository;
 import br.com.facilpay.ecommerce.infra.entities.EstabelecimentoComercialEntity;
 import br.com.facilpay.ecommerce.infra.mapper.EstabelecimentoComercialMapper;
+import br.com.facilpay.ecommerce.output.db.port.EstabelecimentoComercialRepository;
 import br.com.facilpay.shared.domain.EstabelecimentoComercial;
 import br.com.facilpay.shared.exception.EntidadeNaoEncontradaException;
 import br.com.facilpay.shared.exception.EntidadeNaoEncontradaException.TipoEntidade;

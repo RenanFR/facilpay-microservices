@@ -10,14 +10,15 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-import lombok.extern.slf4j.Slf4j;
 
 @Aspect
 @Component
-@Slf4j
 public class MethodLoggerAspect {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(MethodLoggerAspect.class);
 	
 	@Pointcut("execution(* br.com.facilpay.ecommerce.entrypoint.rest..*.*(..))")
 	public void everyMethod() {}
@@ -31,13 +32,13 @@ public class MethodLoggerAspect {
 				.map(Object::toString)
 				.collect(Collectors.joining(","));
 		String returnType = methodSignature.getReturnType().getSimpleName();
-		log.info(String.format(("MÉTODO %s INVOCADO EM %s " + (methodArgs.length != 0? "COM OS PARÂMETROS " +  args : "SEM PARÂMETROS") + ", O TIPO DE RETORNO É %s"), 
+		LOG.info(String.format(("MÉTODO %s INVOCADO EM %s " + (methodArgs.length != 0? "COM OS PARÂMETROS " +  args : "SEM PARÂMETROS") + ", O TIPO DE RETORNO É %s"), 
 				methodSignature.getName(), LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")), returnType));
 		long start = System.nanoTime();
 		Object returningObj = joinPoint.proceed();
 		long end = System.nanoTime();
 		Double timeToComplete = ((end - start) / 1_000_000_000.0);
-		log.info(String.format("MÉTODO LEVOU %f SEGUNDOS PARA COMPLETAR A EXECUÇÃO, RETORNANDO %s", timeToComplete, returningObj));
+		LOG.info(String.format("MÉTODO LEVOU %f SEGUNDOS PARA COMPLETAR A EXECUÇÃO, RETORNANDO %s", timeToComplete, returningObj));
 		return returningObj;
 	}
 
