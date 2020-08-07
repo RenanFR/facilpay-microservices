@@ -12,20 +12,12 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.facilpay.ecommerce.entrypoint.rest.EstabelecimentoComercialFilter;
 import br.com.facilpay.ecommerce.entrypoint.rest.FacilPayResponse;
-import br.com.facilpay.ecommerce.exception.ApiError;
+import br.com.facilpay.ecommerce.infra.test.CucumberTestUtils;
 import br.com.facilpay.shared.domain.EstabelecimentoComercial;
 import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
@@ -42,16 +34,14 @@ public class ConsultaEstabelecimentosFeatureSteps {
 	@LocalServerPort
 	private Integer serverPort;
 	
-	@Autowired
-	private RestTemplate restTemplate;
-	
 	private String endPointURL;
 	
 	private int resultados;
 	
 	private EstabelecimentoComercialFilter filtroPesquisa;	
 	
-	private HttpStatus codigoRetorno;	
+	@Autowired
+	private CucumberTestUtils cucumberTestUtils;	
 	
 	@Before
 	public void setEndPointURL() {
@@ -76,22 +66,14 @@ public class ConsultaEstabelecimentosFeatureSteps {
 		List<EstabelecimentoComercial> estabelecimentosTeste = EstabelecimentoComercial.getEstabelecimentosTeste();
 		LOG.info("DADO QUE TENHO {} REGISTROS DE TESTE", estabelecimentosTeste.size());
 		estabelecimentosTeste.forEach(ec -> {
-			salvarEstabelecimento(ec);
+			cucumberTestUtils.salvarEstabelecimento(endPointURL, ec);
 		});
 	}
 
 	@Quando("realizo a chamada para pesquisa")
 	public void realizoAChamadaParaPesquisa() {
 		LOG.info("QUANDO REALIZO A CHAMADA PARA PESQUISA");
-		ResponseEntity<FacilPayResponse<EstabelecimentoComercial>> response = restTemplate.exchange(UriComponentsBuilder.fromUriString(endPointURL)
-				.queryParam("page", 0)
-				.queryParam("size", 10)
-				.queryParam("cnpj", filtroPesquisa.getCnpj())
-				.queryParam("cpf", filtroPesquisa.getCpf())
-				.queryParam("inscricaoEstadual", filtroPesquisa.getInscricaoEstadual())
-				.queryParam("razaoSocial", filtroPesquisa.getRazaoSocial())
-				.queryParam("nomeFantasia", filtroPesquisa.getNomeFantasia())
-				.toUriString(), HttpMethod.GET, null, new ParameterizedTypeReference<FacilPayResponse<EstabelecimentoComercial>>() {});
+		ResponseEntity<FacilPayResponse<EstabelecimentoComercial>> response = cucumberTestUtils.pesquisarEstabelecimentos(endPointURL, filtroPesquisa);
 	    List<EstabelecimentoComercial> estabelecimentos = response.getBody().getContent();
 	    LOG.info(estabelecimentos.toString());
 		resultados = estabelecimentos.size();
@@ -108,30 +90,4 @@ public class ConsultaEstabelecimentosFeatureSteps {
 	    assertTrue(numResultados == resultados);
 	}	
 	
-	private EstabelecimentoComercial salvarEstabelecimento(EstabelecimentoComercial estabelecimentoComercial) {
-		try {
-			ResponseEntity<EstabelecimentoComercial> postResponse = restTemplate.postForEntity(endPointURL, estabelecimentoComercial, EstabelecimentoComercial.class);
-			HttpStatus status = postResponse.getStatusCode();
-			codigoRetorno = status;
-			return postResponse.getBody();
-		} catch (HttpClientErrorException exception) {
-			codigoRetorno = exception.getStatusCode();
-			ObjectMapper objectMapper = new ObjectMapper();
-			ApiError apiError;
-			try {
-				apiError = objectMapper.readValue(exception.getResponseBodyAsString(), ApiError.class);
-				LOG.error(apiError.getMessage());
-				LOG.error(apiError.getError());
-				apiError
-				.getFieldsErrors()
-				.forEach(err -> {
-					LOG.error(err.getField() + " : " + err.getError());
-				});
-			} catch (Exception e) {
-				LOG.error(e.getMessage());
-			}
-		}
-		return null;
-	}	
-
 }
