@@ -19,9 +19,9 @@ public interface EstabelecimentoComercialRepository {
 	
 	EstabelecimentoComercial buscarPorId(Long id);
 	
-	EstabelecimentoComercial salvarOuAtualizar(EstabelecimentoComercial estabelecimento);
+	EstabelecimentoComercial salvarOuAtualizar(EstabelecimentoComercial estabelecimento, Boolean deveAuditar);
 	
-	EstabelecimentoComercial removePorId(Long id);	
+	EstabelecimentoComercial removePorId(Long id, Boolean deveAuditar);	
 	
 	Page<EstabelecimentoComercial> pesquisar(EstabelecimentoComercialFilter filter, Pageable pageable);
 

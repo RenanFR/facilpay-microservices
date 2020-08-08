@@ -34,11 +34,11 @@ public class EstabelecimentoComercialServiceAdapter implements ManutencaoEstabel
 	}
 
 	public EstabelecimentoComercial salvarOuAtualizar(EstabelecimentoComercial estabelecimento) {
-		return repository.salvarOuAtualizar(estabelecimento);
+		return repository.salvarOuAtualizar(estabelecimento, true);
 	}
 
 	public EstabelecimentoComercial removePorId(Long id) {
-		return repository.removePorId(id);
+		return repository.removePorId(id, true);
 	}
 
 	@Override

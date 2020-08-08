@@ -27,7 +27,9 @@ import br.com.facilpay.ecommerce.entrypoint.rest.EstabelecimentoComercialFilter;
 import br.com.facilpay.ecommerce.infra.entities.EstabelecimentoComercialEntity;
 import br.com.facilpay.ecommerce.infra.mapper.EstabelecimentoComercialMapper;
 import br.com.facilpay.ecommerce.output.db.port.EstabelecimentoComercialRepository;
+import br.com.facilpay.infra.aop.DeveAuditar;
 import br.com.facilpay.shared.domain.EstabelecimentoComercial;
+import br.com.facilpay.shared.domain.HistoricoTabelas;
 import br.com.facilpay.shared.exception.EntidadeNaoEncontradaException;
 import br.com.facilpay.shared.exception.EntidadeNaoEncontradaException.TipoEntidade;
 
@@ -50,6 +52,8 @@ public class EstabelecimentoComercialRepositoryAdapter implements Estabeleciment
 	@PersistenceContext
 	private EntityManager entityManager;	
 	
+	public List<HistoricoTabelas> historicosTabela = new ArrayList<>();
+	
 	@Override
 	public Page<EstabelecimentoComercial> buscarTodos(Pageable pageRequest) {
 		List<EstabelecimentoComercialEntity> results = repository.findAll(pageRequest).toList();
@@ -62,17 +66,20 @@ public class EstabelecimentoComercialRepositoryAdapter implements Estabeleciment
 	}
 
 	@Override
-	public EstabelecimentoComercial salvarOuAtualizar(EstabelecimentoComercial estabelecimento) {
+	@DeveAuditar
+	public EstabelecimentoComercial salvarOuAtualizar(EstabelecimentoComercial estabelecimento, Boolean deveAuditar) {
 		LOG.info("SALVANDO O ESTABELECIMENTO {}", estabelecimento.getRazaoSocial());
+		historicosTabela.add(new HistoricoTabelas());
 		EstabelecimentoComercialEntity ecEntity = mapper.convertToEntity(estabelecimento);
 		return mapper.convertToDto(repository.save(ecEntity));
 	}
 
 	@Override
-	public EstabelecimentoComercial removePorId(Long id) {
+	@DeveAuditar
+	public EstabelecimentoComercial removePorId(Long id, Boolean deveAuditar) {
 		EstabelecimentoComercial ec = this.buscarPorId(id);
 		ec.setAtivo(false);
-		return this.salvarOuAtualizar(ec);
+		return this.salvarOuAtualizar(ec, deveAuditar);
 	}
 
 	@Override

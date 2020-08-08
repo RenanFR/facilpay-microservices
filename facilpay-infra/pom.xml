@@ -19,11 +19,11 @@
   
   <dependencies>
   
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
+	<dependency>
+		<groupId>br.com.facilpay</groupId>
+		<artifactId>facilpay-shared-models</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
     
   </dependencies>
   

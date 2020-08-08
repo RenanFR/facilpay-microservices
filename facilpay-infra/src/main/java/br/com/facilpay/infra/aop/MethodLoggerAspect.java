@@ -20,10 +20,10 @@ public class MethodLoggerAspect {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(MethodLoggerAspect.class);
 	
-	@Pointcut("execution(* br.com.facilpay.ecommerce.entrypoint.rest..*.*(..))")
-	public void everyMethod() {}
+	@Pointcut("execution(* br.com.facilpay.*.entrypoint.rest..*.*(..))")
+	public void everyRestRequest() {}
 
-	@Around("everyMethod()")
+	@Around("everyRestRequest()")
 	public Object logAndCount(ProceedingJoinPoint joinPoint) throws Throwable {
 		MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
 		Object[] methodArgs = joinPoint.getArgs();
