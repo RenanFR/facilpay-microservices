@@ -3,8 +3,14 @@
  */
 package br.com.facilpay.ecommerce.output.db.adapter;
 
+import java.lang.reflect.Field;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -54,6 +60,10 @@ public class EstabelecimentoComercialRepositoryAdapter implements Estabeleciment
 	
 	public List<HistoricoTabelas> historicosTabela = new ArrayList<>();
 	
+	@SuppressWarnings("rawtypes")
+	private static final Set<Class> BASE_TYPES = new HashSet<>(Arrays.asList(
+            String.class, Boolean.class, Character.class, Byte.class, Short.class, Integer.class, Long.class, Float.class, Double.class, Void.class));
+	
 	@Override
 	public Page<EstabelecimentoComercial> buscarTodos(Pageable pageRequest) {
 		List<EstabelecimentoComercialEntity> results = repository.findAll(pageRequest).toList();
@@ -67,19 +77,33 @@ public class EstabelecimentoComercialRepositoryAdapter implements Estabeleciment
 
 	@Override
 	@DeveAuditar
-	public EstabelecimentoComercial salvarOuAtualizar(EstabelecimentoComercial estabelecimento, Boolean deveAuditar) {
+	public EstabelecimentoComercial salvarOuAtualizar(EstabelecimentoComercial estabelecimento) {
+		historicosTabela.clear();
 		LOG.info("SALVANDO O ESTABELECIMENTO {}", estabelecimento.getRazaoSocial());
-		historicosTabela.add(new HistoricoTabelas());
+		if (estabelecimento.getId() != null) {
+			historicosTabela.addAll(this.compararCampos(estabelecimento));
+		}
 		EstabelecimentoComercialEntity ecEntity = mapper.convertToEntity(estabelecimento);
 		return mapper.convertToDto(repository.save(ecEntity));
 	}
 
 	@Override
 	@DeveAuditar
-	public EstabelecimentoComercial removePorId(Long id, Boolean deveAuditar) {
+	public EstabelecimentoComercial trocaStatus(Long id) {
+		historicosTabela.clear();
 		EstabelecimentoComercial ec = this.buscarPorId(id);
-		ec.setAtivo(false);
-		return this.salvarOuAtualizar(ec, deveAuditar);
+		if (ec.getAtivo()) {
+			historicosTabela.add(new HistoricoTabelas("tbl_estabelecimento", "dt_fim_contrato", ec.getId(), null, LocalDateTime.now(), ec.getDataFim().toString(), LocalDateTime.now().toString()));
+			ec.setDataFim(LocalDateTime.now());
+		} else {
+			historicosTabela.add(new HistoricoTabelas("tbl_estabelecimento", "dt_inicio_contrato", ec.getId(), null, LocalDateTime.now(), ec.getDataInicio().toString(),  LocalDateTime.now().toString()));
+			ec.setDataInicio(LocalDateTime.now());
+		}
+		Boolean novoStatus = !ec.getAtivo();
+		LOG.info("TROCANDO O STATUS DO ESTABELECIMENTO {} DE {} PARA {}", ec.getAtivo(), novoStatus, ec.getRazaoSocial());
+		historicosTabela.add(new HistoricoTabelas("tbl_estabelecimento", "fl_ativo", ec.getId(), null, LocalDateTime.now(), ec.getAtivo().toString(), novoStatus.toString()));
+		ec.setAtivo(novoStatus);
+		return this.salvarOuAtualizar(ec);
 	}
 
 	@Override
@@ -135,5 +159,42 @@ public class EstabelecimentoComercialRepositoryAdapter implements Estabeleciment
 				.createQuery(queryBuilder)
 				.getSingleResult();
 	}
+	
+	private List<HistoricoTabelas> compararCampos(EstabelecimentoComercial estabelecimentoComercial) {
+		List<HistoricoTabelas> camposAlterados = new ArrayList<>();
+		EstabelecimentoComercial antigo = this.buscarPorId(estabelecimentoComercial.getId());
+        for (Field field : antigo.getClass().getDeclaredFields()) {
+        	LOG.info("VERIFICANDO MUDANÇAS NO CAMPO {}", field.getName());
+        	field.setAccessible(true);
+			try {
+				Object valueAntigo = field.get(antigo);
+				LOG.info("O VALOR ANTIGO PARA O CAMPO {} ERA {}", field.getName(), valueAntigo.toString());
+				Object valueAtual = field.get(estabelecimentoComercial);
+				LOG.info("O VALOR ATUAL PARA O CAMPO {} É {}", field.getName(), valueAtual.toString());
+				if (isBaseType(valueAntigo.getClass())) {
+					if (!Objects.equals(valueAntigo, valueAtual)) {
+						LOG.info("O CAMPO {} DO ESTABELECIMENTO {} SOFREU ALTERAÇÃO", field.getName(), estabelecimentoComercial.getId());
+						camposAlterados.add(HistoricoTabelas
+								.builder()
+								.idRegistroAlterado(antigo.getId())
+								.idUsuarioAlteracao(null)
+								.nomeTabela("tbl_estabelecimento")
+								.nomeColuna(field.getName())
+								.dataHoraManutencao(LocalDateTime.now())
+								.conteudoAnteriorColuna(valueAntigo.toString())
+								.conteudoAtualColuna(valueAtual.toString())
+								.build());
+					}
+				}
+			} catch (Exception e) {
+				LOG.error("ERRO DURANTE A VERIFICAÇÃO DE MUDANÇAS NO REGISTRO VIA REFLECTION, ERRO: {}", e.getClass().getSimpleName());
+			}        	
+        }		
+		return camposAlterados;
+	}
+	
+	private static boolean isBaseType(@SuppressWarnings("rawtypes") Class clazz) {
+        return BASE_TYPES.contains(clazz);
+    }	
 
 }

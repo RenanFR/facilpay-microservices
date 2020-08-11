@@ -1,5 +1,7 @@
 package br.com.facilpay.audit.output.db.adapter;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,9 +19,8 @@ public class HistoricoTabelasRepositoryAdapter implements HistoricoTabelasReposi
 	private HistoricoTabelasMapper mapper;
 	
 	@Override
-	public void salvarHistorico(HistoricoTabelas historicoTabela) {
-		repository.save(mapper.convertToEntity(historicoTabela));
-		
+	public void salvarHistorico(List<HistoricoTabelas> historicosTabela) {
+		repository.saveAll(mapper.convertAllToEntity(historicosTabela));
 	}
 
 }

@@ -1,5 +1,7 @@
 package br.com.facilpay.audit.entrypoint.rest;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -27,9 +29,9 @@ public class AuditoriaController {
 	@ApiOperation(value = "PERSISTE OS DADOS DE UM ESTABELECIMENTO", notes = "PERMITE CADASTRAR UM NOVO EC NA FÁCIL PAY")
 	@PostMapping
 	public ResponseEntity<Void> auditarAlteracao(
-			@RequestBody @Valid HistoricoTabelas historicoTabela) {
-		LOG.info("AUDITANDO ALTERAÇÃO DE BANCO DE DADOS NA TABELA {}, DADOS: {}", historicoTabela.getNomeTabela(), historicoTabela.toString());
-		manterHistoricoTabelasUseCase.auditarAlteracao(historicoTabela);
+			@RequestBody @Valid List<HistoricoTabelas> historicosTabela) {
+		LOG.info("AUDITANDO ALTERAÇÃO DE BANCO DE DADOS NA TABELA {}, REGISTROS ALTERADOS: {}", historicosTabela.get(0).getNomeTabela(), historicosTabela.size());
+		manterHistoricoTabelasUseCase.auditarAlteracao(historicosTabela);
 		return ResponseEntity.ok().build();
 	}
 	

@@ -73,13 +73,13 @@ public class EstabelecimentoComercialController {
 		return ResponseEntity.ok(ecUseCase.salvarOuAtualizar(estabelecimento));
 	}
 
-	@ApiOperation(value = "REMOÇÃO DE UM ESTABELECIMENTO POR ID", notes = "INATIVAÇÃO (DELEÇÃO LÓGICA) DE UM EC NA BASE DA FÁCIL PAY")
+	@ApiOperation(value = "MUDANÇA DE STATUS DE UM ESTABELECIMENTO POR ID", notes = "INATIVAÇÃO (DELEÇÃO LÓGICA) OU ATIVAÇÃO DE UM EC NA BASE DA FÁCIL PAY")
 	@DeleteMapping("{id}")
 	public ResponseEntity<EstabelecimentoComercial> deleteEstabelecimento(
 			@ApiParam(value = "CÓDIGO IDENTIFICADOR DO ESTABELECIMENTO, GERADO PELO BACK OFFICE DA FÁCIL PAY", example = "1") 
 			@PathVariable("id") Long id) {
-		LOG.info("REALIZANDO A EXCLUSÃO DO ESTABELECIMENTO COM O ID {}", id);
-		return ResponseEntity.ok(ecUseCase.removePorId(id));
+		LOG.info("REALIZANDO A TROCA DE STATUS DO ESTABELECIMENTO COM O ID {}", id);
+		return ResponseEntity.ok(ecUseCase.trocaStatus(id));
 	}
 	
 	@ApiOperation(value = "PESQUISA DE ESTABELECIMENTOS", notes = "PERMITE CONSULTAR ESTABELECIMENTOS COM BASE NOS ATRIBUTOS DEFINIDOS EM UM FILTRO")

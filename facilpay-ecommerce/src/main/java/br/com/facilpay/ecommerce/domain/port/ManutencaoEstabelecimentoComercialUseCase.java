@@ -21,7 +21,7 @@ public interface ManutencaoEstabelecimentoComercialUseCase {
 	
 	EstabelecimentoComercial salvarOuAtualizar(EstabelecimentoComercial estabelecimento);
 	
-	EstabelecimentoComercial removePorId(Long id);
+	EstabelecimentoComercial trocaStatus(Long id);
 	
 	Page<EstabelecimentoComercial> pesquisar(EstabelecimentoComercialFilter filter, Pageable pageable);
 	

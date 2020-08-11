@@ -1,5 +1,7 @@
 package br.com.facilpay.audit.domain.adapter;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +16,8 @@ public class HistoricoTabelasServiceAdapter implements ManterHistoricoTabelasUse
 	private HistoricoTabelasRepository repository;
 
 	@Override
-	public void auditarAlteracao(HistoricoTabelas historicoTabela) {
-		repository.salvarHistorico(historicoTabela);
+	public void auditarAlteracao(List<HistoricoTabelas> historicosTabela) {
+		repository.salvarHistorico(historicosTabela);
 	}
 
 }
