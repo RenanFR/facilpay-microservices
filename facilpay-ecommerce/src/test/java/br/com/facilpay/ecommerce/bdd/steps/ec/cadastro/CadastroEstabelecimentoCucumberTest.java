@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.facilpay.ecommerce.bdd.steps.inativacao;
+package br.com.facilpay.ecommerce.bdd.steps.ec.cadastro;
 
 import org.junit.runner.RunWith;
 
@@ -15,12 +15,12 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		features = "classpath:features/inativacao_ec.feature",
+		features = "classpath:features/cadastro_ec.feature",
 		monochrome = true,	
 		plugin = { "pretty", "html:target/report-html", "json:target/report.json" },
 		snippets = SnippetType.CAMELCASE,
 		dryRun = false
 )
-public class InativacaoEstabelecimentoCucumberTest {
+public class CadastroEstabelecimentoCucumberTest {
 	
 }

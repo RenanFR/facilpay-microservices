@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.facilpay.ecommerce.entrypoint.rest;
+package br.com.facilpay.shared.models;
 
 import java.util.List;
 

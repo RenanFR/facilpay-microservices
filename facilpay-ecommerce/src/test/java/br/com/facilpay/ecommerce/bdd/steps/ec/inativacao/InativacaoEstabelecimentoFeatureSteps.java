@@ -1,7 +1,9 @@
-package br.com.facilpay.ecommerce.bdd.steps.inativacao;
+package br.com.facilpay.ecommerce.bdd.steps.ec.inativacao;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -55,6 +57,9 @@ public class InativacaoEstabelecimentoFeatureSteps {
 	@Dado("o seguinte ec existente na base")
 	public void oSeguinteEcExistenteNaBase(EstabelecimentoComercial estabelecimentoComercial) throws JsonMappingException, JsonProcessingException {
 		LOG.info("DADO O SEGUINTE EC EXISTENTE NA BASE {}", estabelecimentoComercial.getRazaoSocial());
+		estabelecimentoComercial.setDataInicio(LocalDateTime.now());
+		estabelecimentoComercial.setDataFim(LocalDateTime.now().plusYears(1));
+		LOG.info("STATUS ATUAL {}", estabelecimentoComercial.getAtivo());
 		ec = cucumberTestUtils.salvarEstabelecimento(endPointURL, estabelecimentoComercial).getBody();
 	}
 
@@ -69,6 +74,12 @@ public class InativacaoEstabelecimentoFeatureSteps {
 	public void oStatusDoEcPassaASerInativo() {
 		LOG.info("ENTÃO O STATUS DO EC PASSA A SER INATIVO");
 		assertFalse(ec.getAtivo());
+	}	
+	
+	@Então("sera criado o historico de auditoria correspondente")
+	public void seraCriadoOHistoricoDeAuditoriaCorrespondente() {
+		LOG.info("ENTÃO SERA CRIADO O HISTORICO DE AUDITORIA CORRESPONDENTE");
+	    assertEquals(cucumberTestUtils.buscarHistoricoRecemCriado(ec.getId()).size(), 2);
 	}	
 	
 }

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.facilpay.ecommerce.bdd.steps.cadastro;
+package br.com.facilpay.ecommerce.bdd.steps.ec.cadastro;
 
 import static org.junit.Assert.assertEquals;
 

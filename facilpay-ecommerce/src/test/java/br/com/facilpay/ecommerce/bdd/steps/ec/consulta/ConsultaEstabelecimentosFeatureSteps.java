@@ -1,4 +1,4 @@
-package br.com.facilpay.ecommerce.bdd.steps.consulta;
+package br.com.facilpay.ecommerce.bdd.steps.ec.consulta;
 
 import static org.junit.Assert.assertTrue;
 
@@ -16,9 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 
 import br.com.facilpay.ecommerce.entrypoint.rest.EstabelecimentoComercialFilter;
-import br.com.facilpay.ecommerce.entrypoint.rest.FacilPayResponse;
 import br.com.facilpay.ecommerce.infra.test.CucumberTestUtils;
 import br.com.facilpay.shared.domain.EstabelecimentoComercial;
+import br.com.facilpay.shared.models.FacilPayResponse;
 import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;

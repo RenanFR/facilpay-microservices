@@ -32,5 +32,9 @@ public class HistoricoTabelasMapper {
     public List<HistoricoTabelasEntity> convertAllToEntity(List<HistoricoTabelas> dtos) {
 	    return dtos.stream().map(historico -> this.convertToEntity(historico)).collect(Collectors.toList());
 	}      
+    
+    public List<HistoricoTabelas> convertAllToDto(List<HistoricoTabelasEntity> entities) {
+	    return entities.stream().map(ec -> this.convertToDto(ec)).collect(Collectors.toList());
+	}      
 
 }

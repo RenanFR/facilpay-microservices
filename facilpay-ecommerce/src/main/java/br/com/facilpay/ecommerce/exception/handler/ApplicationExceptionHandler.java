@@ -65,7 +65,8 @@ public class ApplicationExceptionHandler {
 	public ResponseEntity<?> handleGeneric(RuntimeException exception, HttpServletRequest httpRequest) {
 		
 		String userMessage = "ERRO NO PROCESSAMENTO DA REQUISIÇÃO (BACKEND)";
-		LOG.error(exception.getMessage());
+		LOG.error("ERRO: {}", exception.getClass().getCanonicalName());
+		exception.printStackTrace();
 		String devMessage = exception.toString();
 		
 		List<ApiError> errors = List.of(ApiError

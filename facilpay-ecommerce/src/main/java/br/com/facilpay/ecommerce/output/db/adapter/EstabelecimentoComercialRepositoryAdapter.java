@@ -93,17 +93,20 @@ public class EstabelecimentoComercialRepositoryAdapter implements Estabeleciment
 		historicosTabela.clear();
 		EstabelecimentoComercial ec = this.buscarPorId(id);
 		if (ec.getAtivo()) {
+			LOG.info("{} ATUALMENTE ESTÁ ATIVO", ec.getRazaoSocial());
 			historicosTabela.add(new HistoricoTabelas("tbl_estabelecimento", "dt_fim_contrato", ec.getId(), null, LocalDateTime.now(), ec.getDataFim().toString(), LocalDateTime.now().toString()));
 			ec.setDataFim(LocalDateTime.now());
 		} else {
+			LOG.info("{} ATUALMENTE ESTÁ INATIVO", ec.getRazaoSocial());
 			historicosTabela.add(new HistoricoTabelas("tbl_estabelecimento", "dt_inicio_contrato", ec.getId(), null, LocalDateTime.now(), ec.getDataInicio().toString(),  LocalDateTime.now().toString()));
 			ec.setDataInicio(LocalDateTime.now());
 		}
 		Boolean novoStatus = !ec.getAtivo();
-		LOG.info("TROCANDO O STATUS DO ESTABELECIMENTO {} DE {} PARA {}", ec.getAtivo(), novoStatus, ec.getRazaoSocial());
+		LOG.info("TROCANDO O STATUS DO ESTABELECIMENTO {} DE {} PARA {}", ec.getRazaoSocial(), ec.getAtivo(), novoStatus);
 		historicosTabela.add(new HistoricoTabelas("tbl_estabelecimento", "fl_ativo", ec.getId(), null, LocalDateTime.now(), ec.getAtivo().toString(), novoStatus.toString()));
 		ec.setAtivo(novoStatus);
-		return this.salvarOuAtualizar(ec);
+		EstabelecimentoComercialEntity ecEntity = mapper.convertToEntity(ec);
+		return mapper.convertToDto(repository.save(ecEntity));
 	}
 
 	@Override
@@ -166,10 +169,13 @@ public class EstabelecimentoComercialRepositoryAdapter implements Estabeleciment
         for (Field field : antigo.getClass().getDeclaredFields()) {
         	LOG.info("VERIFICANDO MUDANÇAS NO CAMPO {}", field.getName());
         	field.setAccessible(true);
-			try {
+        	tryReflection: try {
 				Object valueAntigo = field.get(antigo);
-				LOG.info("O VALOR ANTIGO PARA O CAMPO {} ERA {}", field.getName(), valueAntigo.toString());
 				Object valueAtual = field.get(estabelecimentoComercial);
+				if (valueAntigo == null && valueAtual == null) {
+					break tryReflection;
+				}
+				LOG.info("O VALOR ANTIGO PARA O CAMPO {} ERA {}", field.getName(), valueAntigo.toString());
 				LOG.info("O VALOR ATUAL PARA O CAMPO {} É {}", field.getName(), valueAtual.toString());
 				if (isBaseType(valueAntigo.getClass())) {
 					if (!Objects.equals(valueAntigo, valueAtual)) {

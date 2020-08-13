@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.facilpay.ecommerce.domain.port.ManutencaoEstabelecimentoComercialUseCase;
 import br.com.facilpay.infra.SwaggerConfig;
 import br.com.facilpay.shared.domain.EstabelecimentoComercial;
+import br.com.facilpay.shared.models.FacilPayResponse;
+import br.com.facilpay.shared.models.ResponseMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -109,15 +111,10 @@ public class EstabelecimentoComercialController {
 				.build();
 		LOG.info("REALIZANDO A BUSCA POR ESTABELECIMENTOS USANDO OS SEGUINTES CRITÉRIOS: {}", filter);
 		Page<EstabelecimentoComercial> resultadoPesquisa = ecUseCase.pesquisar(filter, PageRequest.of(page, size));
-		FacilPayResponse<EstabelecimentoComercial> response = new FacilPayResponse<>();
-		response.setContent(resultadoPesquisa.getContent());
-		response.setFirst(resultadoPesquisa.isFirst());
-		response.setLast(resultadoPesquisa.isLast());
-		response.setNumberOfElements(resultadoPesquisa.getNumberOfElements());
-		response.setTotalElements(resultadoPesquisa.getTotalElements());
-		response.setPageNumber(resultadoPesquisa.getNumber());
-		response.setPageSize(resultadoPesquisa.getSize());
-		response.setTotalPages(resultadoPesquisa.getTotalPages());
+		FacilPayResponse<EstabelecimentoComercial> response = new ResponseMapper<EstabelecimentoComercial>()
+				.map(resultadoPesquisa.getContent(), resultadoPesquisa.isFirst(), resultadoPesquisa.isLast(), 
+						resultadoPesquisa.getNumberOfElements(), resultadoPesquisa.getTotalElements(), 
+						resultadoPesquisa.getNumber(), resultadoPesquisa.getSize(), resultadoPesquisa.getTotalPages());
 		return ResponseEntity.ok().body(response);
 	}
 	

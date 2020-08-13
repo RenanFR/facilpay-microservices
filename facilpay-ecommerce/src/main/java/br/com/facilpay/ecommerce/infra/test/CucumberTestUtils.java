@@ -1,5 +1,7 @@
 package br.com.facilpay.ecommerce.infra.test;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -16,20 +18,24 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.facilpay.ecommerce.entrypoint.rest.EstabelecimentoComercialFilter;
-import br.com.facilpay.ecommerce.entrypoint.rest.FacilPayResponse;
 import br.com.facilpay.ecommerce.exception.ApiError;
+import br.com.facilpay.infra.output.http.port.AuditoriaClient;
 import br.com.facilpay.shared.domain.EstabelecimentoComercial;
+import br.com.facilpay.shared.domain.HistoricoTabelas;
 import br.com.facilpay.shared.models.Contato;
 import br.com.facilpay.shared.models.Endereco;
+import br.com.facilpay.shared.models.FacilPayResponse;
 
 @Service
 public class CucumberTestUtils {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(CucumberTestUtils.class);
 	
-	
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	@Autowired
+	private AuditoriaClient auditoriaClient;	
 	
     public EstabelecimentoComercial ecFromCucumberDataTable(Map<String, String> dataTable) {
 		EstabelecimentoComercial estabelecimentoComercial = new EstabelecimentoComercial();
@@ -91,6 +97,11 @@ public class CucumberTestUtils {
 	public ResponseEntity<EstabelecimentoComercial> deleteEstabelecimento(String endPointURL, EstabelecimentoComercial ec) {
 		ResponseEntity<EstabelecimentoComercial> response = restTemplate.exchange(endPointURL + "/" + ec.getId(), HttpMethod.DELETE, null, EstabelecimentoComercial.class);
 		return response;		
+	}
+	
+	public List<HistoricoTabelas> buscarHistoricoRecemCriado(Long idRegistro) {
+		return auditoriaClient.getHistoricoAuditoriaRegistro("tbl_estabelecimento", idRegistro, LocalDateTime.now().minusMinutes(1), 
+				LocalDateTime.now().plusMinutes(1), 0, 10).getContent();
 	}
 	
 }
