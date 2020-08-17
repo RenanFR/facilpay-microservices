@@ -86,8 +86,8 @@ public class EstabelecimentoComercialEntity {
 	private EnderecoEntity endereco;
 	
 	@ManyToOne
-	@JoinColumn(name  = "id_segmento", foreignKey = @ForeignKey(name = "fk_estabelecimento_segmento"))
-	private SegmentoEstabelecimentoEntity segmento;
+	@JoinColumn(name  = "id_mcc", foreignKey = @ForeignKey(name = "fk_estabelecimento_mcc"))
+	private MCCEntity mcc;
 	
 	@Column(name = "ds_atv_economica")
 	private String atividadeEconomica;

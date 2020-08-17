@@ -114,7 +114,7 @@ public class EstabelecimentoComercialRepositoryAdapter implements Estabeleciment
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<EstabelecimentoComercialEntity> queryBuilder = criteriaBuilder.createQuery(EstabelecimentoComercialEntity.class);
 		Root<EstabelecimentoComercialEntity> rootEntity = queryBuilder.from(EstabelecimentoComercialEntity.class);
-		queryBuilder.select(rootEntity).where(mapeiaCondicoes(filter, criteriaBuilder, rootEntity));
+		queryBuilder.select(rootEntity).where(criteriaBuilder.or(mapeiaCondicoes(filter, criteriaBuilder, rootEntity)));
 		TypedQuery<EstabelecimentoComercialEntity> query = entityManager.createQuery(queryBuilder);
 		adicionaRestricoesPaginacao(query, pageable);
 		List<EstabelecimentoComercialEntity> results = query.getResultList();

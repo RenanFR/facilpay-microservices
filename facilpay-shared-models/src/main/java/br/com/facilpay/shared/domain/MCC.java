@@ -20,24 +20,24 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(
-	    value = "Segmento de atuação (EC)",
+	    value = "Segmento de atuação (MCC/Merchant Category Code)",
 	    description = "CONTROLE INTERNO DE SEGMENTOS DE ATUAÇÃO DOS ECs"
 )
-public class SegmentoEstabelecimento {
+public class MCC {
 	
 	@ApiModelProperty(
-			value = "CÓDIGO DO SEGMENTO NA BASE DA FÁCIL PAY",
-			example = "1")
-	private Long id;	
+			value = "CÓDIGO DO MCC",
+			example = "1799")
+	private Long mccCode;	
 	
 	@ApiModelProperty(
 			value = "NOME DO SEGMENTO DE ATUAÇÃO",
-			example = "Comércio de bebidas")		
+			example = "DEPARTMENT STORES")		
 	private String nome;	
 	
 	@ApiModelProperty(
 			value = "DESCRIÇÃO TEXTUAL DO SEGMENTO DE ATUAÇÃO",
-			example = "Comércio de vendas de bebidas do distribuidor para o consumidor ou outro negócio ")	
+			example = "DEPARTMENT STORES")	
 	private String descricao;		
 	
 }

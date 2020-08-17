@@ -15,7 +15,7 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		features = "classpath:features/inativacao_ec.feature",
+		features = "classpath:features/ec/inativacao_ec.feature",
 		monochrome = true,	
 		plugin = { "pretty", "html:target/report-html", "json:target/report.json" },
 		snippets = SnippetType.CAMELCASE,

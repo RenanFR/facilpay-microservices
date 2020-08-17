@@ -9,8 +9,6 @@ import java.util.List;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import br.com.caelum.stella.bean.validation.CNPJ;
 import br.com.caelum.stella.bean.validation.CPF;
 import br.com.facilpay.shared.models.Contato;
@@ -37,7 +35,7 @@ import lombok.ToString;
 	    value = "Estabelecimento comercial (EC)",
 	    description = "DADOS DO ESTABELECIMENTO CUJO REGISTRO NA BASE SERÁ ATUALIZADO/INSERIDO"
 )
-@ToString(exclude = { "segmento", "servicosContratados" })
+@ToString(exclude = { "mcc", "servicosContratados" })
 @Builder
 public class EstabelecimentoComercial {
 	
@@ -88,24 +86,18 @@ public class EstabelecimentoComercial {
 	@ApiModelProperty(
 			value = "DATA DE INÍCIO DA VIGÊNCIA DO CADASTRO DO EC JUNTO A FÁCIL PAY",
 			example = "28/07/2020")	
-//	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
-//	@JsonSerialize(using = LocalDateTimeSerializer.class)
-//	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private LocalDateTime dataInicio;
 	
 	@ApiModelProperty(
 			value = "DATA DE FIM DA VIGÊNCIA DO CADASTRO DO EC JUNTO A FÁCIL PAY",
 			example = "31/12/2020")		
-//	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
-//	@JsonSerialize(using = LocalDateTimeSerializer.class)
-//	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private LocalDateTime dataFim;
 	
 	private Contato contato;
 	
 	private Endereco endereco;
 	
-	private SegmentoEstabelecimento segmento;
+	private MCC mcc;
 	
 	@ApiModelProperty(
 			value = "ATIVIDADES QUE A EMPRESA ESTÁ AUTORIZADA A EXECUTAR – CNAEs",

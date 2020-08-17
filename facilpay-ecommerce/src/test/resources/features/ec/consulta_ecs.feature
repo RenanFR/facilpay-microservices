@@ -1,4 +1,5 @@
 # language: pt
+@sprint1
 Funcionalidade: consulta de estabelecimentos comerciais
   como usuario do back office da facil pay
 	desejo realizar a busca de um ou mais estabelecimentos de acordo com criterios

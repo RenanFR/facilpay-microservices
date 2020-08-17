@@ -17,10 +17,11 @@
             
 	    </insert>	
 	        
-	    <insert tableName="tbl_segmento_estabelecimento">
-	            
-            <column name="nm_segmento" type="VARCHAR(255)" value="Comércio de bebidas"/>
-            <column name="ds_segmento" type="VARCHAR(255)" value="Comércio de vendas de bebidas do distribuidor para o consumidor ou outro negócio"/>
+	    <insert tableName="tbl_mcc">
+	        
+	        <column name="id_mcc" type="BIGINT" value="1799"/>    
+            <column name="nm_mcc" type="VARCHAR(255)" value="Comércio de bebidas"/>
+            <column name="ds_mcc" type="VARCHAR(255)" value="Comércio de vendas de bebidas do distribuidor para o consumidor ou outro negócio"/>
             
 	    </insert>	    
         

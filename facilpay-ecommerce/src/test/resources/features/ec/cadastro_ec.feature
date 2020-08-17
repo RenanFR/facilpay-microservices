@@ -1,4 +1,5 @@
 # language: pt
+@sprint1
 Funcionalidade: cadastro de estabelecimento comercial
   como usuario do back office da facil pay
 	desejo incluir um novo ec contratante

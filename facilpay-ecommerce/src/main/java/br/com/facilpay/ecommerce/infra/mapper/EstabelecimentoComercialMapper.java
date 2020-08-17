@@ -13,10 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.facilpay.ecommerce.infra.entities.EstabelecimentoComercialEntity;
-import br.com.facilpay.ecommerce.infra.entities.SegmentoEstabelecimentoEntity;
+import br.com.facilpay.ecommerce.infra.entities.MCCEntity;
 import br.com.facilpay.ecommerce.infra.entities.ServicoFacilPayEntity;
 import br.com.facilpay.shared.domain.EstabelecimentoComercial;
-import br.com.facilpay.shared.domain.SegmentoEstabelecimento;
+import br.com.facilpay.shared.domain.MCC;
 import br.com.facilpay.shared.domain.ServicoFacilPay;
 import br.com.facilpay.shared.entities.ContatoEntity;
 import br.com.facilpay.shared.entities.EnderecoEntity;
@@ -42,8 +42,8 @@ public class EstabelecimentoComercialMapper {
 		Optional.ofNullable(entity.getEndereco()).ifPresent((endereco) -> { 
 			estabelecimentoComercial.setEndereco(modelMapper.map(endereco, Endereco.class));
 		}); 
-		Optional.ofNullable(entity.getSegmento()).ifPresent((segmento) -> { 
-			estabelecimentoComercial.setSegmento(modelMapper.map(segmento, SegmentoEstabelecimento.class));
+		Optional.ofNullable(entity.getMcc()).ifPresent((mcc) -> { 
+			estabelecimentoComercial.setMcc(modelMapper.map(mcc, MCC.class));
 		}); 
 		Optional.ofNullable(entity.getServicosContratados()).ifPresent((servicos) -> { 
 			estabelecimentoComercial.setServicosContratados(modelMapper.map(servicos, new TypeToken<List<ServicoFacilPay>>() {}.getType()));
@@ -59,8 +59,8 @@ public class EstabelecimentoComercialMapper {
 		Optional.ofNullable(dto.getContato()).ifPresent((contato) -> { 
 			estabelecimentoComercial.setContato(modelMapper.map(contato, ContatoEntity.class));
 		}); 		
-		Optional.ofNullable(dto.getSegmento()).ifPresent((segmento) -> { 
-			estabelecimentoComercial.setSegmento(convertSegmentoToEntity(segmento));
+		Optional.ofNullable(dto.getMcc()).ifPresent((mcc) -> { 
+			estabelecimentoComercial.setMcc(convertSegmentoToEntity(mcc));
 		}); 		
 		Optional.ofNullable(dto.getServicosContratados()).ifPresent((servicos) -> { 
 			estabelecimentoComercial.setServicosContratados(modelMapper.map(servicos, new TypeToken<List<ServicoFacilPayEntity>>() {}.getType()));    	
@@ -68,8 +68,8 @@ public class EstabelecimentoComercialMapper {
 	    return estabelecimentoComercial;
 	}
     
-    public SegmentoEstabelecimentoEntity convertSegmentoToEntity(SegmentoEstabelecimento segmentoDTO) {
-    	return modelMapper.map(segmentoDTO, SegmentoEstabelecimentoEntity.class);
+    public MCCEntity convertSegmentoToEntity(MCC segmentoDTO) {
+    	return modelMapper.map(segmentoDTO, MCCEntity.class);
     }     
     
     public List<EstabelecimentoComercial> convertAllToDto(List<EstabelecimentoComercialEntity> entities) {

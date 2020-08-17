@@ -7,8 +7,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -24,25 +22,24 @@ import lombok.Setter;
  */
 
 @Entity
-@Table(name = "tbl_segmento_estabelecimento")
+@Table(name = "tbl_mcc")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SegmentoEstabelecimentoEntity {
+public class MCCEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_segmento")
-	private Long id;	
+	@Column(name = "id_mcc")
+	private Long mccCode;	
 	
-	@Column(name = "ds_segmento")
+	@Column(name = "ds_mcc")
 	private String descricao;		
 	
-	@Column(name = "nm_segmento")
+	@Column(name = "nm_mcc")
 	private String nome;
 	
-	@OneToMany(mappedBy = "segmento")
+	@OneToMany(mappedBy = "mcc")
 	private List<EstabelecimentoComercialEntity> estabelecimentos;
 
 }
