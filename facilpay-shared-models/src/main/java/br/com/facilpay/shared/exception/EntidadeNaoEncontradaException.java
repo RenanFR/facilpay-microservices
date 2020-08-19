@@ -19,7 +19,8 @@ public class EntidadeNaoEncontradaException extends RuntimeException {
 	}
 	
 	public enum TipoEntidade {
-		ESTABELECIMENTO("estabelecimento comercial"), 
+		ESTABELECIMENTO("estabelecimento comercial"),
+		USUARIOS("usuário"),
 		TRANSACAO("transação financeira");
 		
 		String tipo;

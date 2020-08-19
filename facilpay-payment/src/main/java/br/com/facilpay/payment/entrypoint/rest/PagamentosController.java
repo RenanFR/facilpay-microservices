@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.facilpay.infra.SwaggerConfig;
 import br.com.facilpay.payment.domain.Transacao;
 import br.com.facilpay.payment.domain.port.TransacaoCartaoCreditoUseCase;
 import br.com.facilpay.payment.input.http.port.EstabelecimentoComercialClient;
 import br.com.facilpay.shared.domain.EstabelecimentoComercial;
+import io.swagger.annotations.Api;
 
 /**
  * @author rnfr
@@ -26,6 +28,7 @@ import br.com.facilpay.shared.domain.EstabelecimentoComercial;
 
 @RestController
 @RequestMapping(path = { "pagamentos" })
+@Api(tags = { SwaggerConfig.TAG_TRANSACOES })
 public class PagamentosController {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(PagamentosController.class);

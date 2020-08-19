@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog 
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext 
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd 
+		http://www.liquibase.org/xml/ns/dbchangelog 
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="Diego de Jesus Cordeiro" id="01 Estrutura Pay Inicial OAuth">
+    
+        <createTable tableName="tbl_usuario">
+            <column autoIncrement="true" name="id_usuario" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="pk_tbl_usuario"/>
+            </column>
+            <column name="nm_login" type="VARCHAR(255)"/>
+            <column name="ds_senha" type="VARCHAR(255)"/>
+            <column name="fl_ativo" type="BOOL"/>
+            <column name="dt_criacao" type="DATE"/>
+            <column name="dt_manutencao" type="DATE"/>
+        </createTable>            
+        
+        <createTable tableName="tbl_perfil">
+            <column name="nm_perfil" type="VARCHAR(255)">
+            	<constraints unique="true"/>
+            </column>
+            <column name="dt_criacao" type="DATE"/>
+            <column name="dt_manutencao" type="DATE"/>
+        </createTable>
+        
+        <createTable tableName="tbl_perfil_usuario">
+            <column name="nm_perfil" type="VARCHAR(255)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="id_usuario" type="BIGINT">
+            	<constraints nullable="false"/>
+            </column>
+        </createTable> 
+        
+    	<addPrimaryKey 
+   				columnNames="nm_perfil, id_usuario"
+                constraintName="pk_tbl_perfil_usuario"
+                tableName="tbl_perfil_usuario"/>        
+        
+    </changeSet>
+    
+</databaseChangeLog>
