@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog 
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext 
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd 
+		http://www.liquibase.org/xml/ns/dbchangelog 
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="Renan F Rodrigues" id="02 Usuário e perfil para teste inicial do fluxo de login">
+    
+	    <insert tableName="tbl_perfil">
+            <column name="nm_perfil" type="VARCHAR(255)" value="qa"/>
+	    </insert>
+	    
+	    <insert tableName="tbl_usuario">
+            <column name="nm_login" type="VARCHAR(255)" value="qa"/>
+            <column name="ds_senha" type="VARCHAR(255)" value="$2a$10$GXhjonY/RqzXF74jowHAXOazFSKEvhQd9Pz1hgtnoSQBLkx0D2GyK"/>
+            <column name="fl_ativo" type="BOOL" value="true"/>
+	    </insert>	
+	    
+	    <insert tableName="tbl_perfil_usuario">
+            <column name="id_usuario" type="BIGINT" valueComputed="(SELECT id_usuario FROM tbl_usuario WHERE nm_login = 'qa')"/>
+            <column name="nm_perfil" type="VARCHAR(255)" value="qa"/>
+	    </insert>	            
+    
+    </changeSet>
+    
+</databaseChangeLog>

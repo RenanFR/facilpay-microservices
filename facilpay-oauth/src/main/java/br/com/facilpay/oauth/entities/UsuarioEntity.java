@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,11 +52,11 @@ public class UsuarioEntity implements UserDetails, Serializable {
 	@Column(name = "ds_senha")
 	private String senha;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			  name = "tbl_perfil_usuario", 
 			  joinColumns = @JoinColumn(name = "id_usuario"), 
-			  inverseJoinColumns = @JoinColumn(name = "id_perfil")
+			  inverseJoinColumns = @JoinColumn(name = "nm_perfil")
 			)
 	private List<PerfilEntity> perfis;
 

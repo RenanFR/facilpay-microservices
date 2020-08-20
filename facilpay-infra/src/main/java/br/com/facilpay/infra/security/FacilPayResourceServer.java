@@ -1,4 +1,4 @@
-package br.com.facilpay.oauth.config.security;
+package br.com.facilpay.infra.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,11 +16,14 @@ public class FacilPayResourceServer extends ResourceServerConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-			.antMatchers("/v2/api-docs", 
+			.antMatchers(
+					"/v2/api-docs", 
 					"/swagger-resources", 
-					"/swagger-ui.html", 
+					"/swagger-ui.html",
+					"/actuator/**", 
 					"/webjars/**",
-					"/swagger.json")
+					"/swagger.json",
+					"/oauth/check_token")
 	        .permitAll()
 	        .anyRequest()
 	        	.authenticated()

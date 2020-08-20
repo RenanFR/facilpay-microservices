@@ -9,5 +9,6 @@
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
 	<include file="changelog/01-estrutura-pay-inicial-oauth.xml" relativeToChangelogFile="true"/>
+	<include file="changelog/02-credenciais-teste.xml" relativeToChangelogFile="true"/>
 	
 </databaseChangeLog>

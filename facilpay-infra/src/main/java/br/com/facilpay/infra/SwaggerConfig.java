@@ -73,7 +73,7 @@ public class SwaggerConfig {
 	private List<AuthorizationScope> getAuthorizationScopeList() {
 		return List.of(
 				new AuthorizationScope("read", "Read all"), 
-				new AuthorizationScope("trust", "Trust all"), 
+				new AuthorizationScope("web", "Web scope"), 
 				new AuthorizationScope("write", "Access all"));
 	}
 	

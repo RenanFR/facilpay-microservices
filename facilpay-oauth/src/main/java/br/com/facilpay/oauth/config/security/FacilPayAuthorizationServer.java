@@ -11,11 +11,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
+import br.com.facilpay.oauth.config.token.TokenEnhancerCustom;
 import br.com.facilpay.oauth.service.UsuarioService;
 
 @Configuration
@@ -39,9 +41,9 @@ public class FacilPayAuthorizationServer extends AuthorizationServerConfigurerAd
 			.inMemory()
 			.withClient("test‐client")
 			.secret(passwordEncoder.encode("test‐secret"))
-			.scopes("read", "write")
+			.scopes("web", "read", "write")
 			.authorizedGrantTypes("password", "refresh_token")
-			.accessTokenValiditySeconds(20)
+			.accessTokenValiditySeconds(43200)
 			.refreshTokenValiditySeconds(86400);
 	}
 
@@ -56,6 +58,14 @@ public class FacilPayAuthorizationServer extends AuthorizationServerConfigurerAd
 			.userDetailsService(usuarioService)
 			.authenticationManager(authenticationManager);
 	}
+	
+	@Override
+	public void configure(AuthorizationServerSecurityConfigurer authServerSecurityConfig) throws Exception {
+		authServerSecurityConfig
+			.passwordEncoder(passwordEncoder)
+			.tokenKeyAccess("permitAll()")
+			.checkTokenAccess("isAuthenticated()");
+	}	
 
 	@Bean
 	public JwtAccessTokenConverter jwtAccessTokenConverter() {
