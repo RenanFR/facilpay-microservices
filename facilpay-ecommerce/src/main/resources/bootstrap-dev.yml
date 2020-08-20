@@ -1,0 +1,10 @@
+spring: 
+  application:
+    name: 'facilpay-backoffice-ec'
+  cloud:
+    consul:
+      config:
+        fail-fast: true
+        profileSeparator: '_'
+      host: host.docker.internal
+      port: 8500
