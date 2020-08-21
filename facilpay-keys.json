@@ -10,9 +10,34 @@
                 "value": "YnIuY29tLmZhY2lscGF5LmVjb21tZXJjZS5lbnRyeXBvaW50LnJlc3Q="
         },
         {
+                "key": "config/facilpay-backoffice-ec/app/client/id",
+                "flags": 0,
+                "value": "ZmFjaWxwYXktZWNvbW1lcmNl"
+        },
+        {
+                "key": "config/facilpay-backoffice-ec/app/client/secret",
+                "flags": 0,
+                "value": "ZmFjaWxwYXktZWNvbW1lcmNl"
+        },
+        {
                 "key": "config/facilpay-backoffice-ec/entityPackage",
                 "flags": 0,
                 "value": "YnIuY29tLmZhY2lscGF5LmVjb21tZXJjZS5pbmZyYS5lbnRpdGllcw=="
+        },
+        {
+                "key": "config/facilpay-backoffice-ec/feign/client/config/default/connectTimeout",
+                "flags": 0,
+                "value": "MTYwMDAwMDAw"
+        },
+        {
+                "key": "config/facilpay-backoffice-ec/feign/client/config/default/readTimeout",
+                "flags": 0,
+                "value": "MTYwMDAwMDAw"
+        },
+        {
+                "key": "config/facilpay-backoffice-ec/host/full/dns/auth/link",
+                "flags": 0,
+                "value": "aHR0cDovL2xvY2FsaG9zdDo4MDg4"
         },
         {
                 "key": "config/facilpay-backoffice-ec/liquibase/change-log",
@@ -35,6 +60,36 @@
                 "value": "SU5GTw=="
         },
         {
+                "key": "config/facilpay-backoffice-ec/security/oauth2/client/accessTokenUri",
+                "flags": 0,
+                "value": "aHR0cDovL2xvY2FsaG9zdDo4MDg4L29hdXRoL2FjY2Vzc190b2tlbg=="
+        },
+        {
+                "key": "config/facilpay-backoffice-ec/security/oauth2/client/clientId",
+                "flags": 0,
+                "value": "Y2xpZW50"
+        },
+        {
+                "key": "config/facilpay-backoffice-ec/security/oauth2/client/clientSecret",
+                "flags": 0,
+                "value": "Y2xpZW50"
+        },
+        {
+                "key": "config/facilpay-backoffice-ec/security/oauth2/client/userAuthorizationUri",
+                "flags": 0,
+                "value": "aHR0cDovL2xvY2FsaG9zdDo4MDg4L29hdXRoL2F1dGhvcml6ZQ=="
+        },
+        {
+                "key": "config/facilpay-backoffice-ec/security/oauth2/resource/token-info-uri",
+                "flags": 0,
+                "value": "aHR0cDovL2xvY2FsaG9zdDo4MDg4L29hdXRoL2NoZWNrX3Rva2Vu"
+        },
+        {
+                "key": "config/facilpay-backoffice-ec/security/oauth2/resource/user-info-uri",
+                "flags": 0,
+                "value": "aHR0cDovL2xvY2FsaG9zdDo4MDg4L3VzdWFyaW9z"
+        },
+        {
                 "key": "config/facilpay-backoffice-ec/server/port",
                 "flags": 0,
                 "value": "ODA4MA=="
@@ -47,12 +102,12 @@
         {
                 "key": "config/facilpay-backoffice-ec/spring/datasource/jdbcUrl",
                 "flags": 0,
-                "value": "amRiYzpwb3N0Z3Jlc3FsOi8vbG9jYWxob3N0OjU0MzIvZmFjaWxwYXktZGItZWM="
+                "value": "amRiYzpwb3N0Z3Jlc3FsOi8vZmFjaWxwYXktZGIuY3prdmRoejQxazY0LnVzLWVhc3QtMi5yZHMuYW1hem9uYXdzLmNvbTo1NDMyL2ZhY2lscGF5LWRiLWVj"
         },
         {
                 "key": "config/facilpay-backoffice-ec/spring/datasource/password",
                 "flags": 0,
-                "value": "cG9zdGdyZXM="
+                "value": "Q29Ob1NUck8="
         },
         {
                 "key": "config/facilpay-backoffice-ec/spring/datasource/username",
@@ -115,9 +170,24 @@
                 "value": "YnIuY29tLmZhY2lscGF5LmF1ZGl0LmVudHJ5cG9pbnQucmVzdA=="
         },
         {
+                "key": "config/facilpay-commons-audit/app/client/id",
+                "flags": 0,
+                "value": "Y2xpZW50"
+        },
+        {
+                "key": "config/facilpay-commons-audit/app/client/secret",
+                "flags": 0,
+                "value": "c2VjcmV0"
+        },
+        {
                 "key": "config/facilpay-commons-audit/entityPackage",
                 "flags": 0,
                 "value": "YnIuY29tLmZhY2lscGF5LmF1ZGl0LmluZnJhLmVudGl0aWVz"
+        },
+        {
+                "key": "config/facilpay-commons-audit/host/full/dns/auth/link",
+                "flags": 0,
+                "value": "aHR0cDovL2xvY2FsaG9zdDo4MDg4"
         },
         {
                 "key": "config/facilpay-commons-audit/liquibase/change-log",
@@ -135,6 +205,36 @@
                 "value": "dGJsX2RhdGFiYXNlX21pZ3JhdGlvbnM="
         },
         {
+                "key": "config/facilpay-commons-audit/security/oauth2/client/accessTokenUri",
+                "flags": 0,
+                "value": "aHR0cDovL2xvY2FsaG9zdDo4MDg4L29hdXRoL2FjY2Vzc190b2tlbg=="
+        },
+        {
+                "key": "config/facilpay-commons-audit/security/oauth2/client/clientId",
+                "flags": 0,
+                "value": "Y2xpZW50"
+        },
+        {
+                "key": "config/facilpay-commons-audit/security/oauth2/client/clientSecret",
+                "flags": 0,
+                "value": "c2VjcmV0"
+        },
+        {
+                "key": "config/facilpay-commons-audit/security/oauth2/client/userAuthorizationUri",
+                "flags": 0,
+                "value": "aHR0cDovL2xvY2FsaG9zdDo4MDg4L29hdXRoL2F1dGhvcml6ZQ=="
+        },
+        {
+                "key": "config/facilpay-commons-audit/security/oauth2/resource/token-info-uri",
+                "flags": 0,
+                "value": "aHR0cDovL2xvY2FsaG9zdDo4MDg4L29hdXRoL2NoZWNrX3Rva2Vu"
+        },
+        {
+                "key": "config/facilpay-commons-audit/security/oauth2/resource/user-info-uri",
+                "flags": 0,
+                "value": "aHR0cDovL2xvY2FsaG9zdDo4MDg4L3VzdWFyaW9z"
+        },
+        {
                 "key": "config/facilpay-commons-audit/server/port",
                 "flags": 0,
                 "value": "ODA4Mg=="
@@ -147,12 +247,12 @@
         {
                 "key": "config/facilpay-commons-audit/spring/datasource/jdbcUrl",
                 "flags": 0,
-                "value": "amRiYzpwb3N0Z3Jlc3FsOi8vbG9jYWxob3N0OjU0MzIvZmFjaWxwYXktZGItYXVkaXQ="
+                "value": "amRiYzpwb3N0Z3Jlc3FsOi8vZmFjaWxwYXktZGIuY3prdmRoejQxazY0LnVzLWVhc3QtMi5yZHMuYW1hem9uYXdzLmNvbTo1NDMyL2ZhY2lscGF5LWRiLWF1ZGl0"
         },
         {
                 "key": "config/facilpay-commons-audit/spring/datasource/password",
                 "flags": 0,
-                "value": "cG9zdGdyZXM="
+                "value": "Q29Ob1NUck8="
         },
         {
                 "key": "config/facilpay-commons-audit/spring/datasource/username",
@@ -165,14 +265,114 @@
                 "value": "b3JnLmhpYmVybmF0ZS5kaWFsZWN0LlBvc3RncmVTUUxEaWFsZWN0"
         },
         {
+                "key": "config/facilpay-oauth/",
+                "flags": 0,
+                "value": ""
+        },
+        {
+                "key": "config/facilpay-oauth/apiPackage",
+                "flags": 0,
+                "value": "YnIuY29tLmZhY2lscGF5Lm9hdXRoLmVudHJ5cG9pbnQucmVzdA=="
+        },
+        {
+                "key": "config/facilpay-oauth/app/client/id",
+                "flags": 0,
+                "value": "Y2xpZW50"
+        },
+        {
+                "key": "config/facilpay-oauth/app/client/secret",
+                "flags": 0,
+                "value": "c2VjcmV0"
+        },
+        {
+                "key": "config/facilpay-oauth/entityPackage",
+                "flags": 0,
+                "value": "YnIuY29tLmZhY2lscGF5Lm9hdXRoLmVudGl0aWVz"
+        },
+        {
+                "key": "config/facilpay-oauth/host/full/dns/auth/link",
+                "flags": 0,
+                "value": "aHR0cDovL2xvY2FsaG9zdDo4MDg4"
+        },
+        {
+                "key": "config/facilpay-oauth/liquibase/change-log",
+                "flags": 0,
+                "value": "Y2xhc3NwYXRoOi9kYi9mYWNpbHBheS1kYi1vYXV0aC1jaGFuZ2Vsb2cueG1s"
+        },
+        {
+                "key": "config/facilpay-oauth/liquibase/database-change-log-lock-table",
+                "flags": 0,
+                "value": "dGJsX2RhdGFiYXNlX21pZ3JhdGlvbnNfbG9jaw=="
+        },
+        {
+                "key": "config/facilpay-oauth/liquibase/database-change-log-table",
+                "flags": 0,
+                "value": "dGJsX2RhdGFiYXNlX21pZ3JhdGlvbnM="
+        },
+        {
+                "key": "config/facilpay-oauth/logging/level/liquibase",
+                "flags": 0,
+                "value": "SU5GTw=="
+        },
+        {
+                "key": "config/facilpay-oauth/server/port",
+                "flags": 0,
+                "value": "ODA4OA=="
+        },
+        {
+                "key": "config/facilpay-oauth/spring/datasource/driverClassName",
+                "flags": 0,
+                "value": "b3JnLnBvc3RncmVzcWwuRHJpdmVy"
+        },
+        {
+                "key": "config/facilpay-oauth/spring/datasource/jdbcUrl",
+                "flags": 0,
+                "value": "amRiYzpwb3N0Z3Jlc3FsOi8vZmFjaWxwYXktZGIuY3prdmRoejQxazY0LnVzLWVhc3QtMi5yZHMuYW1hem9uYXdzLmNvbTo1NDMyL2ZhY2lscGF5LWRiLW9hdXRo"
+        },
+        {
+                "key": "config/facilpay-oauth/spring/datasource/password",
+                "flags": 0,
+                "value": "Q29Ob1NUck8="
+        },
+        {
+                "key": "config/facilpay-oauth/spring/datasource/username",
+                "flags": 0,
+                "value": "cG9zdGdyZXM="
+        },
+        {
+                "key": "config/facilpay-oauth/spring/jwt/secret",
+                "flags": 0,
+                "value": "ZmFjaWxwYXktb2F1dGg="
+        },
+        {
+                "key": "config/facilpay-oauth/sqlDialect",
+                "flags": 0,
+                "value": "b3JnLmhpYmVybmF0ZS5kaWFsZWN0LlBvc3RncmVTUUxEaWFsZWN0"
+        },
+        {
                 "key": "config/facilpay-payment-tx/apiPackage",
                 "flags": 0,
                 "value": "YnIuY29tLmZhY2lscGF5LnBheW1lbnQuZW50cnlwb2ludC5yZXN0"
         },
         {
+                "key": "config/facilpay-payment-tx/app/client/id",
+                "flags": 0,
+                "value": "ZmFjaWxwYXktcGF5bWVudA=="
+        },
+        {
+                "key": "config/facilpay-payment-tx/app/client/secret",
+                "flags": 0,
+                "value": "ZmFjaWxwYXktcGF5bWVudA=="
+        },
+        {
                 "key": "config/facilpay-payment-tx/entityPackage",
                 "flags": 0,
                 "value": "YnIuY29tLmZhY2lscGF5LnBheW1lbnQuaW5mcmEuZW50aXRpZXM="
+        },
+        {
+                "key": "config/facilpay-payment-tx/host/full/dns/auth/link",
+                "flags": 0,
+                "value": "aHR0cDovL2xvY2FsaG9zdDo4MDg4"
         },
         {
                 "key": "config/facilpay-payment-tx/liquibase/change-log",
@@ -207,12 +407,12 @@
         {
                 "key": "config/facilpay-payment-tx/spring/datasource/jdbcUrl",
                 "flags": 0,
-                "value": "amRiYzpwb3N0Z3Jlc3FsOi8vbG9jYWxob3N0OjU0MzIvZmFjaWxwYXktZGItdHg="
+                "value": "amRiYzpwb3N0Z3Jlc3FsOi8vZmFjaWxwYXktZGIuY3prdmRoejQxazY0LnVzLWVhc3QtMi5yZHMuYW1hem9uYXdzLmNvbTo1NDMyL2ZhY2lscGF5LWRiLXR4"
         },
         {
                 "key": "config/facilpay-payment-tx/spring/datasource/password",
                 "flags": 0,
-                "value": "cG9zdGdyZXM="
+                "value": "Q29Ob1NUck8="
         },
         {
                 "key": "config/facilpay-payment-tx/spring/datasource/username",
