@@ -1,0 +1,10 @@
+spring: 
+  application:
+    name: 'facilpay-commons-audit'
+  cloud:
+    consul:
+      config:
+        fail-fast: true
+        profileSeparator: '_'
+      host: host.docker.internal
+      port: 8500
