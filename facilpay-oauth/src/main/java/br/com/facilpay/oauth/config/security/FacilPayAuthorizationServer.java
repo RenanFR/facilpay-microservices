@@ -39,8 +39,8 @@ public class FacilPayAuthorizationServer extends AuthorizationServerConfigurerAd
 	public void configure(ClientDetailsServiceConfigurer clientConfig) throws Exception {
 		clientConfig
 			.inMemory()
-			.withClient("test‐client")
-			.secret(passwordEncoder.encode("test‐secret"))
+			.withClient("client")
+			.secret(passwordEncoder.encode("secret"))
 			.scopes("web", "read", "write")
 			.authorizedGrantTypes("password", "refresh_token")
 			.accessTokenValiditySeconds(43200)

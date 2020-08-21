@@ -17,12 +17,15 @@ public class FacilPayResourceServer extends ResourceServerConfigurerAdapter {
 		http
 			.authorizeRequests()
 			.antMatchers(
-					"/v2/api-docs", 
-					"/swagger-resources", 
+					"/v2/api-docs",
+					"/swagger-resources",
+					"/swagger-resources/configuration/ui",
+					"/swagger-resources/configuration/security",
 					"/swagger-ui.html",
-					"/actuator/**", 
+					"/actuator/**",
 					"/webjars/**",
 					"/swagger.json",
+					"/oauth/token",
 					"/oauth/check_token")
 	        .permitAll()
 	        .anyRequest()
