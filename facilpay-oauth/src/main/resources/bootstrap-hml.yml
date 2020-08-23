@@ -1,0 +1,10 @@
+spring: 
+  application:
+    name: 'facilpay-oauth'
+  cloud:
+    consul:
+      config:
+        fail-fast: true
+        profileSeparator: '_'
+      host: 18.222.20.99
+      port: 8500
